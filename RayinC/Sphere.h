@@ -2,10 +2,9 @@
 #define Sphere_H
 #include<stdbool.h>
 #include<stdio.h>
-#include"Vectors.h"
-#include"Ray.h"
-#include"Colorobject.h"
-#include"Colors.h"
+#include "Vectors.h"
+#include "Colors.h"
+#include "Ray.h"
 typedef struct sphere
 {   
     float radius;
@@ -16,8 +15,11 @@ typedef struct sphere
 } Sphere;
 
 
-bool HitSphere(Sphere sphere, Vector3 center, Vector3 origin, float radius,Color color, Ray ray)
+bool HitSphere(Sphere sphere, Vector3 center, Vector3 origin, float radius, Color color, Ray ray)
 {
+    (void)center;
+    (void)origin;
+    (void)color;
     Vector3 oc = Subtract(sphere.center, ray.origin);
     Vector3 x = dotproduct(ray.direction, ray.direction);
     Vector3 Y = dotproduct(ray.direction, oc);
@@ -33,3 +35,4 @@ bool HitSphere(Sphere sphere, Vector3 center, Vector3 origin, float radius,Color
 
 }
 #endif
+  

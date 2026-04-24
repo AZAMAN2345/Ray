@@ -4,14 +4,14 @@
 #include <stdio.h>
 #include "Vectors.h"
 #include "Camera.h"
-#include "Ray.h"
-#include "Colorobject.h"
-
 typedef struct color
 {
-    
     Vector3 color;
 } Color;
+
+#include "Ray.h"
+#include "Colorobject.h"
+#include "Sphere.h"
 
 // Constants
 const double width      = 16.0;
@@ -32,13 +32,13 @@ void writeColor(FILE* f, float ImageWidth, float ImageHeight)
     Vector3 Camera_position  = {0.0, 0.0, 0.0};
     Vector3 CameraCenter     = {0.0, 0.0, 0.0};
     Camera camera;
-    Camera_init(camera, height, width, fov, Camera_position, CameraCenter);
+    camera = Camera_init(camera, height, width, fov, Camera_position, CameraCenter);
 
     // Ray setup
     Vector3 RayDirection = {0.0, 0.0, 0.0};
     Vector3 RayPosition  = {0.0, 0.0, 0.0};
     Ray ray;
-    Ray_init(ray, RayPosition, RayDirection);
+    ray = Ray_init(ray, RayPosition, RayDirection);
 
     Color raycolor = {{1.0, 1.0, 0.0}}; 
 
@@ -66,17 +66,16 @@ void writeColor(FILE* f, float ImageWidth, float ImageHeight)
                                        Scale(pixeldeltav, (float)j));
 
             Vector3 raydirection = Subtract(pixelcenter, camera.Camera_position);
-            Ray_init(ray, camera.Camera_position, raydirection);
+            ray = Ray_init(ray, camera.Camera_position, raydirection);
 
-            Vector3 result = colorRAycast(ray, raycolor);
+            Color result = colorRAycast(ray, raycolor);
 
-            int ir = (int)(255.999 * result.X);
-            int ig = (int)(255.999 * result.Y);
-            int ib = (int)(255.999 * result.Z);
+            int ir = (int)(255.999 * result.color.X);
+            int ig = (int)(255.999 * result.color.Y);
+            int ib = (int)(255.999 * result.color.Z);
 
             fprintf(f, "%d %d %d\n", ir, ig, ib);
         }
     }
-
-    fclose(f); }
+}
 #endif

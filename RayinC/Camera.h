@@ -2,7 +2,6 @@
 #define Camera_H
 #include<stdio.h>
 #include "Vectors.h"
-#include "Ray.h"
 
 typedef struct 
 {

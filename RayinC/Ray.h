@@ -3,7 +3,6 @@
 #include<stdio.h>
 #include "Vectors.h"
 #include "Colors.h"
-#include "Colorobject.h"
 
 typedef struct ray
 {
@@ -31,6 +30,4 @@ Vector3 Ray_at(Ray ray, double t) {
     result.Z = ray.origin.Z + t * ray.direction.Z;
     return result;
 }
-
-
 #endif 
